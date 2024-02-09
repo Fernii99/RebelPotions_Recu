@@ -24,7 +24,7 @@ export default function Landing(){
         <div className="App">
             <header className="App-header">
                 <h1> LAS POCIMAS REBELDES  </h1>
-                <button onClick={getPotions}>
+                <button style={{height:'100px', width: '300px'}}onClick={getPotions}>
                     ENTER
                 </button>
             </header>
