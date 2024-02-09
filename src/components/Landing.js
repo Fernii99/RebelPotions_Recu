@@ -13,8 +13,10 @@ export default function Landing(){
         const data = await(axios.get('https://gist.githubusercontent.com/Oskar-Dam/ad2c96601e79ad108227bc25f90e4e53/raw/25dc0198b2aaa85f0b5583978a0c6772cab63aba/Potions.js'))
     
         if(data != {}){
-            setPotions(data.data)
+            setPotions(data.data);
             isDataLoaded(true);
+            console.log("LISTADO DE POCIONES");
+            console.log(data.data);
         }
     }
 
