@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+  
 import './App.css';
+import { Context } from './helpers/context';
+
+import { useState } from 'react';
+import Landing from './components/Landing';
 
 function App() {
+
+  const[dataLoaded, isDataLoaded] = useState(false)
+  const[gameLaunched, isGameLaunched] = useState(false);
+  const[gameEnd, isGameEnd] = useState(false);
+  const [potions, setPotions] = useState([]);
+  
+  const [player1, setPlayer1] = useState({
+    'dice': 0,
+    'potion':{}
+  });
+
+  const [player2, setPlayer2] = useState({
+    'dice': 0,
+    'potion':{}
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Context.Provider value={{player1, setPlayer1, player2, setPlayer2, potions, setPotions, isGameLaunched, isDataLoaded}}>
+     
+          <Landing/>
+          
+    </Context.Provider>
   );
 }
 
