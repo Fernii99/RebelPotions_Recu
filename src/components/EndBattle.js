@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../helpers/context";
 
 import dice1 from '../assets/dado1.png';
@@ -18,80 +18,82 @@ export default function EndBattle(){
 
     const diceImages = ["", dice1, dice2, dice3, dice4, dice5, dice6];
 
-    // function calculateWinner() {
+    const player1Result = ((player1.dice * 0.1) * player1.potion.power) / player1.potion.mana
+    const player2Result = ((player2.dice * 0.1) * player2.potion.power) / player2.potion.mana
 
-    // }
+    function resetGame() {
+        isGameLaunched(false);
+    }
 
     return(
         <div className="App-header">
         <div style={{ display: 'flex', flexDirection: 'row'}}>
             <div style={{backgroundColor: 'white', height: '600px', width:'500px', }}> 
                 <div style={{display:'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-around', paddingTop: '15px',paddingBottom: '15px'  }}>
-                     {/* Dice image */}
-                     { player1.potion.curative ?  
-                        <img src={potion} width={150}></img> 
+                     { player1Result > player2Result ?  
+                        <p style={{color: "black"}}>Winner Potion</p> 
                         :
-                        <img src={poison} width={150}></img>
+                        <p style={{color: "black"}}>Loser Potion</p> 
                     }
-                    {/* Potion image */}
                     { player1.potion.curative ?  
-
                             <img src={potion} width={150}></img> 
                         :
                             <img src={poison} width={150}></img>
                     }
                 </div>
 
-                <div style={{display:'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-around', paddingTop: '15px',paddingBottom: '15px'  }}>
-                     {/* Dice image */}
-                     { player1.potion.curative ?  
-                        <img src={potion} width={150}></img> 
-                        :
-                        <img src={poison} width={150}></img>
-                    }
-                    {/* Potion image */}
-                    { player1.potion.curative ?  
-
-                            <img src={potion} width={150}></img> 
-                        :
-                            <img src={poison} width={150}></img>
-                    }
+                <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-around', alignItems:'center', marginTop: '50px'}}>
+                    <span style={{ color: "black" }}> DICE RESULT </span>
+                    <img src={diceImages[player1.dice]} width={90}></img>
                 </div>
 
-                <div style={{  display:'flex', alignItems: 'center', justifyContent:'center', marginTop: '50px'}}>
-                        <span style={{ color: "black", }}> TOTAL SCORE: <br/>
-                0.2 X 68 / 23 = 0.59 </span>
+                <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-around', alignItems:'center', }}>
+                     <span style={{ color: "red" }}> {player1.dice} X 0.1 = {(player1.dice * 0.1).toFixed(2)} </span>
+                </div>
+
+                <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', marginTop: '50px'}}>
+                    <span style={{ color: "black" }}> TOTAL SCORE: </span> 
+                    <span style={{ color: "black" }}> {(player1.dice * 0.1).toFixed(2)} X {player1.potion.power} / {player1.potion.mana} = {player1Result.toFixed(2)} </span>
                 </div>
                   
             </div>
 
 
-            <div style={{backgroundColor: 'white', height: '600px', width:'500px', marginRight:'50px', }}> 
+            <div style={{backgroundColor: 'white', height: '600px', width:'500px', }}> 
                 <div style={{display:'flex', flexDirection: 'row', alignItems: 'center', justifyContent:'space-around', paddingTop: '15px',paddingBottom: '15px'  }}>
-                    
-                    {/* Dice image */}
-                        <img src={diceImages[player2.dice]} width={90}></img>
+                     {/* Dice image */}
+                     {  player1Result < player2Result ?  
+                        <p style={{color: "black"}}>Winner Potion</p> 
+                        :
+                        <p style={{color: "black"}}>Loser Potion</p> 
+                    }
 
-                    {/* Potion image */}
                     { player2.potion.curative ?  
+
                             <img src={potion} width={150}></img> 
                         :
                             <img src={poison} width={150}></img>
                     }
-                    
                 </div>
-            
-                <div style={{ flexDirection:'row', flex:'flex', marginLeft:'10px',paddingLeft:'10px', width:'90%', border:'2px solid rgba(0, 0, 0, 1)' }}>
-                    <p style={{fontSize: '20px', lineHeight: '19px', color:'black'}}> Name: {player2.potion.name} </p>
-                    <p style={{fontSize: '20px', lineHeight: '19px', color:'black'}}> Alias: {player2.potion.alias} </p>
-                    <p style={{fontSize: '20px', lineHeight: '19px', color:'black'}}>Curative: {player2.potion.curative ? "true" : "false"}</p>
-                    <p style={{fontSize: '20px', lineHeight: '19px', color:'black'}}>Power: {player2.potion.power}</p> 
-                    <p style={{fontSize: '20px', lineHeight: '19px', color:'black'}}>Mana: {player2.potion.mana}</p> 
+
+                <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-around', alignItems:'center', marginTop: '50px'}}>
+                    <span style={{ color: "black" }}> DICE RESULT </span>
+                    <img src={diceImages[player2.dice]} width={90}></img>
                 </div>
+
+                <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-around', alignItems:'center', }}>
+                     <span style={{ color: "red" }}> {player2.dice} X 0.1 = {(player2.dice * 0.1).toFixed(2)} </span>
+                </div>
+
+                <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', marginTop: '50px'}}>
+                    <span style={{ color: "black" }}> TOTAL SCORE: </span> 
+                    <span style={{ color: "black" }}> {(player2.dice * 0.1).toFixed(2)} X {player2.potion.power} / {player2.potion.mana} = {player2Result.toFixed(2)} </span>
+                </div>
+                  
             </div>
         </div>
         <div>
-            <button style={{marginTop: '20px',height:'100px', width: '300px'}} > LAUNCH BATTLE </button>
+            <button style={{marginTop: '20px',height:'100px', width: '300px', fontSize: '30px'}} onClick={resetGame} > END GAME </button>
         </div>
     </div>
     )

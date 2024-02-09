@@ -102,7 +102,7 @@ export default function BattleScreen(){
                     </div>
                 </div>
                 <div>
-                    <button style={{marginTop: '20px',height:'100px', width: '300px'}} onClick={launchBattle}> LAUNCH BATTLE </button>
+                    <button style={{marginTop: '20px',height:'100px', width: '300px', fontSize: '30px'}} onClick={launchBattle}> LAUNCH BATTLE </button>
                 </div>
             </div>
     
